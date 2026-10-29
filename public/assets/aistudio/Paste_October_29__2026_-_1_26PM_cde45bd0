@@ -1,0 +1,1050 @@
+# MASTER PROMPT — BUILD AN ENTERPRISE HR KPI INTELLIGENCE PLATFORM
+
+## 1. PROJECT OVERVIEW
+
+Act as a senior full-stack software architect, enterprise SaaS engineer, HR analytics expert, data scientist, and professional UI/UX designer.
+
+Build a complete, modern, production-oriented web application called:
+
+**HR KPI Intelligence Platform**
+
+The purpose of this platform is to transform HR Key Performance Indicator (KPI) reference documents into a fully functional, automated HR performance measurement, monitoring, and reporting system.
+
+This must be a real working web application, not a static website or visual prototype.
+
+The application should allow organizations to:
+
+1. Import HR KPI reference files.
+2. Extract and organize individual KPI definitions.
+3. Convert each KPI into an interactive digital card.
+4. Understand each KPI's purpose, definition, formula, and usage.
+5. Enter the operational data required to calculate each KPI.
+6. Calculate KPI values automatically using accurate formulas.
+7. Monitor KPI performance through dashboards.
+8. Define targets, thresholds, and performance expectations.
+9. Generate scheduled weekly and monthly performance reports.
+10. Analyze historical performance and identify trends.
+11. Receive alerts when KPIs fall outside acceptable thresholds.
+12. Manage multiple organizations, departments, and users.
+13. Use AI to explain insights and recommend improvements.
+
+Build this as an enterprise-ready, scalable SaaS platform suitable for HR departments, HR consultants, companies, and executive management.
+
+---
+
+## 2. CORE TECHNICAL ARCHITECTURE
+
+Use a modern full-stack architecture suitable for Google AI Studio.
+
+Preferred technologies:
+
+- React and TypeScript for the frontend.
+- Tailwind CSS for styling.
+- Modern reusable UI components.
+- Node.js for backend operations.
+- Firebase Authentication for user authentication.
+- Firebase Firestore for persistent data storage.
+- Secure server-side APIs for business logic.
+- Recharts or a similar library for interactive analytics.
+- Google Gemini API for document understanding and AI explanations.
+- Cloud Functions and Cloud Scheduler for automated background reporting.
+- PDF and Excel processing libraries.
+- Support for Google Drive and Google Sheets integrations.
+
+Use the Google AI Studio native Firebase and Google Workspace integrations when available.
+
+Do not hardcode API keys or credentials.
+
+Never expose secrets in frontend code.
+
+Use a modular architecture with separate components for:
+
+- User interface
+- Authentication and authorization
+- Organization management
+- KPI definitions
+- Formula calculation engine
+- Data entry and validation
+- Reporting
+- Notifications
+- AI analytics
+- File import
+- Scheduling
+- Audit logging
+
+Store all important business data persistently.
+
+Do not rely on browser localStorage as the primary database.
+
+If a requested integration requires external configuration, implement the necessary interfaces and clearly identify the required setup.
+
+---
+
+## 3. KPI DOCUMENT IMPORT AND INTELLIGENT EXTRACTION
+
+The platform must support importing HR KPI reference documents from:
+
+- Google Drive
+- Google Sheets
+- Excel files (XLSX)
+- CSV files
+- PDF documents
+- Word documents (DOCX)
+
+Create a dedicated page called:
+
+**KPI Library Import Center**
+
+Users should be able to upload files or select authorized files from Google Drive.
+
+### Document Processing
+
+When a file is uploaded:
+
+1. Analyze the document structure.
+2. Detect individual KPI cards or KPI definitions.
+3. Identify the total number of KPIs.
+4. Extract the available information for every KPI.
+5. Detect duplicate indicators.
+6. Identify missing or unclear information.
+7. Create structured KPI records.
+8. Show the extraction results before saving.
+9. Allow the administrator to approve, correct, or reject extracted data.
+
+### Extract These Fields
+
+For each KPI, extract:
+
+- KPI ID
+- KPI name
+- Arabic KPI name, when available
+- English KPI name, when available
+- Category
+- Subcategory
+- Definition
+- Description
+- Purpose
+- Business objectives
+- Practical applications
+- Calculation formula
+- Required input variables
+- Input variable descriptions
+- Measurement unit
+- Measurement frequency
+- Suggested reporting frequency, if provided
+- Interpretation guidelines
+- Target value, if documented
+- Performance thresholds, if documented
+- Relevant HR department
+- Source document
+- Source page or location
+- Additional notes
+
+Preserve the original formula and definition exactly as documented.
+
+Do not invent missing KPI formulas, targets, or thresholds.
+
+If information is missing, mark it as "Requires Review."
+
+Distinguish between:
+
+- Information extracted directly from the source.
+- AI-generated suggestions.
+- Administrator-approved information.
+
+AI-generated suggestions must never silently replace original source information.
+
+### KPI Extraction Summary
+
+After importing a file, display:
+
+- Total KPIs detected.
+- Successfully extracted KPIs.
+- KPIs requiring review.
+- Duplicate KPIs.
+- KPIs with valid formulas.
+- KPIs without complete formulas.
+- Categories detected.
+
+Allow users to review extracted KPI cards individually or in bulk.
+
+Do not display a fabricated KPI count when no real source document has been analyzed.
+
+---
+
+## 4. INTERACTIVE KPI LIBRARY
+
+Create a professional KPI Library where every performance indicator appears as an interactive card.
+
+Each KPI card must display:
+
+- KPI name
+- Category
+- Short description
+- Reporting frequency
+- Current calculated value
+- Target value
+- Performance status
+- Last updated date
+- Data completeness status
+
+Users should be able to click any card to open a detailed KPI page.
+
+### Detailed KPI Page
+
+The detailed page must contain:
+
+**Overview**
+- KPI definition
+- Business purpose
+- Importance
+- Relevant HR applications
+
+**Calculation Method**
+- Mathematical formula
+- Explanation of each formula variable
+- Measurement units
+- Example calculation
+
+**Data Entry**
+- Dynamic input form based on the KPI's formula
+- Historical inputs
+- Data submission controls
+
+**Performance**
+- Current KPI result
+- Target comparison
+- Performance status
+- Historical trend chart
+
+**Insights**
+- AI-generated interpretation
+- Possible causes of poor performance
+- Recommended improvement actions
+
+**Reports**
+- Weekly reports
+- Monthly reports
+- Downloadable historical reports
+
+Add search, filtering, sorting, favorites, and category grouping.
+
+Possible HR categories include:
+
+- Recruitment and Talent Acquisition
+- Employee Retention
+- Employee Turnover
+- Attendance and Absenteeism
+- Compensation and Benefits
+- Employee Engagement
+- Learning and Development
+- Workforce Productivity
+- Performance Management
+- HR Operational Efficiency
+- Workforce Planning
+- Diversity and Inclusion
+- Employee Relations
+- Other categories detected from uploaded documents
+
+The categories should remain editable.
+
+---
+
+## 5. DYNAMIC KPI DATA ENTRY ENGINE
+
+This is one of the most important components.
+
+Every KPI may have a different formula and therefore requires different input variables.
+
+Build a dynamic form-generation engine.
+
+The system must automatically generate the relevant data-entry fields based on each approved KPI definition.
+
+For example:
+
+### Example A: Employee Turnover Rate
+
+Formula:
+
+Employee Turnover Rate (%) = (Number of Employees Who Left / Average Number of Employees) × 100
+
+Required inputs:
+
+- Number of employees who left.
+- Average number of employees during the measurement period.
+
+The user enters the numbers.
+
+The platform automatically calculates the result.
+
+### Example B: Absenteeism Rate
+
+Formula:
+
+Absenteeism Rate (%) = (Total Absence Days / Total Available Working Days) × 100
+
+Required inputs:
+
+- Total employee absence days.
+- Total available working days.
+
+### Example C: Time to Hire
+
+Formula:
+
+Time to Hire = Total Hiring Duration / Number of Completed Hires
+
+Required inputs:
+
+- Total hiring duration.
+- Number of completed hires.
+
+Important:
+
+These examples are for demonstration purposes.
+
+When actual KPI reference documents are imported, prioritize their approved definitions and formulas.
+
+### Dynamic Form Requirements
+
+Each input field should support:
+
+- Field name
+- Description
+- Data type
+- Measurement unit
+- Required or optional status
+- Minimum and maximum values
+- Decimal precision
+- Input frequency
+- Validation rules
+- Helpful instructions
+
+Allow daily, weekly, monthly, quarterly, and annual data entry where relevant.
+
+Store timestamps for every submission.
+
+Allow authorized users to edit previously submitted values.
+
+Maintain an audit trail of all changes.
+
+Provide bulk entry through Excel or CSV.
+
+Allow administrators to create custom data-entry templates.
+
+Support data entry at organization, department, team, or employee-group level where appropriate.
+
+---
+
+## 6. ADVANCED KPI CALCULATION ENGINE
+
+Create a flexible, deterministic KPI calculation engine.
+
+The engine must support different mathematical formulas without requiring developers to write custom code for every new KPI.
+
+Support:
+
+- Addition
+- Subtraction
+- Multiplication
+- Division
+- Percentages
+- Ratios
+- Averages
+- Weighted averages
+- Sums
+- Counts
+- Minimum and maximum values
+- Period-over-period changes
+- Rolling averages
+- Aggregated calculations
+- Conditional formulas where needed
+
+### Calculation Requirements
+
+1. Automatically recalculate KPI values after data submission.
+2. Validate required input fields.
+3. Handle missing values correctly.
+4. Prevent division-by-zero errors.
+5. Respect measurement units.
+6. Apply formula-specific rounding rules.
+7. Preserve historical results.
+8. Support different calculation periods.
+9. Recalculate historical periods when authorized corrections occur.
+10. Track the formula version used for each calculation.
+
+### Critical Mathematical Rule
+
+Do not simply average daily or weekly percentages when calculating an aggregated monthly percentage unless the KPI methodology explicitly requires it.
+
+For ratio-based KPIs, aggregate the appropriate numerators and denominators before performing the final calculation.
+
+Use weighted calculations when required.
+
+Support snapshot-based indicators that cannot be calculated by summing daily values.
+
+Do not assume all KPIs are additive.
+
+Never use generative AI as the mathematical calculation engine.
+
+Use deterministic, testable code to calculate all numeric results.
+
+Use a safe formula parser or approved expression engine.
+
+Never execute imported formulas as unrestricted JavaScript code.
+
+Each formula should have a validation and approval process.
+
+---
+
+## 7. KPI TARGETS AND PERFORMANCE SCORING
+
+Allow administrators to define a target for each KPI.
+
+Support different performance directions:
+
+**Higher Is Better**
+Examples: Employee Satisfaction, Training Completion.
+
+**Lower Is Better**
+Examples: Employee Turnover, Absenteeism.
+
+**Target Range**
+Examples: Indicators expected to remain within an acceptable range.
+
+For each KPI, allow configurable performance thresholds.
+
+Display:
+
+- Actual value
+- Target value
+- Variance from target
+- Percentage deviation where appropriate
+- Performance status
+
+Suggested statuses:
+
+- On Track — Green
+- At Risk — Yellow
+- Off Track — Red
+- Insufficient Data — Gray
+- Not Yet Configured — Neutral
+
+Do not assume the same scoring formula works for every KPI.
+
+Raw KPI values, normalized scores, and performance ratings must be treated as separate concepts.
+
+Only generate a normalized performance score when a clearly defined and approved scoring method exists.
+
+Thresholds and targets must be configurable per organization, department, KPI, and effective date.
+
+---
+
+## 8. AUTOMATED WEEKLY AND MONTHLY REPORTS
+
+Build a complete automated reporting system.
+
+This must operate using real backend scheduling, not browser-based timers.
+
+### Weekly Reports
+
+Allow each organization to select:
+
+- Thursday
+- Sunday
+- Another preferred weekday
+
+Allow users to configure the report generation time and time zone.
+
+Default time zone: Asia/Riyadh.
+
+The system must:
+
+1. Determine the correct reporting period.
+2. Collect all relevant submitted data.
+3. Validate data completeness.
+4. Calculate KPI values.
+5. Compare results against targets.
+6. Determine performance statuses.
+7. Generate a structured weekly report.
+8. Store the report permanently.
+9. Notify authorized users.
+
+Make weekly reporting boundaries configurable so reports never accidentally include incomplete or overlapping periods.
+
+### Monthly Reports
+
+Automatically generate monthly reports on the first day of every new month.
+
+The report must analyze the complete previous calendar month.
+
+Example:
+
+On November 1, the system generates the report for October 1–31.
+
+The monthly report should contain:
+
+- Reporting period
+- Total monitored KPIs
+- Number of KPIs on target
+- Number of KPIs at risk
+- Number of KPIs below target
+- KPIs with insufficient data
+- Actual KPI values
+- Targets
+- Variances
+- Performance trends
+- Significant improvements
+- Significant declines
+- Management recommendations
+
+### Additional Reports
+
+Support:
+
+- Daily monitoring summaries
+- Weekly reports
+- Monthly reports
+- Quarterly reports
+- Annual reports
+- Custom date-range reports
+
+### Report Delivery
+
+Support:
+
+- In-app report history
+- PDF export
+- Excel export
+- CSV export
+- Email notifications where properly configured
+
+Include a "Generate Report Now" button.
+
+Ensure scheduled report jobs are idempotent and cannot create duplicate reports for the same organization, indicator, and reporting period.
+
+Handle failed jobs with appropriate retry and error logging.
+
+Store report-generation timestamps and execution status.
+
+If actual cloud scheduling is not configured, clearly show that scheduled automation is not yet active.
+
+Do not claim reports are being sent automatically without a deployed and functioning scheduler.
+
+---
+
+## 9. EXECUTIVE ANALYTICS DASHBOARD
+
+Create an advanced executive dashboard.
+
+The dashboard should provide an immediate overview of organizational HR performance.
+
+### Main Dashboard Components
+
+**Summary Cards**
+
+- Total Active KPIs
+- KPIs On Track
+- KPIs At Risk
+- KPIs Off Track
+- KPIs With Missing Data
+- Reports Generated This Month
+
+**Visual Analytics**
+
+- Performance trend line charts
+- Actual vs Target comparisons
+- KPI distribution charts
+- Department performance charts
+- Historical performance tables
+- Period-over-period comparisons
+- KPI status distribution
+
+### Filters
+
+Allow filtering by:
+
+- Organization
+- Department
+- KPI category
+- Specific KPI
+- Date range
+- Reporting frequency
+- Performance status
+- User responsibility
+
+### Executive Experience
+
+Include:
+
+- Top-performing indicators
+- Lowest-performing indicators
+- Most improved indicators
+- Indicators requiring immediate attention
+- Upcoming reporting deadlines
+- Missing data alerts
+
+Design the dashboard for both HR professionals and senior executives.
+
+Avoid misleading aggregate scores.
+
+Do not create an overall company performance score unless an approved weighted scoring model has been configured.
+
+---
+
+## 10. MULTI-ORGANIZATION SAAS ARCHITECTURE
+
+The platform must support multiple independent organizations.
+
+Each organization should have:
+
+- Organization profile
+- Departments
+- Employees or relevant workforce groups
+- Organization-specific KPIs
+- Assigned users
+- Target settings
+- Reporting schedules
+- Historical data
+- Reports
+- Notification preferences
+
+### User Roles
+
+Create these roles:
+
+**Super Admin**
+- Manage platform configuration.
+- Manage KPI master library.
+- Manage organizations.
+- Manage system-level settings.
+
+**Organization Admin**
+- Manage organization users.
+- Assign KPIs.
+- Configure targets.
+- Manage departments.
+- Approve KPI definitions.
+- Configure reports.
+
+**HR Manager**
+- Monitor organizational KPIs.
+- Review and approve submitted data.
+- View performance reports.
+
+**Data Entry User**
+- Enter assigned KPI data.
+- View permitted KPI cards.
+
+**Executive Viewer**
+- View approved dashboards and reports.
+- No editing privileges.
+
+Implement secure role-based access control.
+
+Enforce organization isolation at both database and API levels.
+
+Users must never access another organization's private data unless explicitly authorized.
+
+---
+
+## 11. AI-POWERED KPI INTELLIGENCE
+
+Integrate Google Gemini to provide intelligent analysis.
+
+The AI assistant should help users understand KPI results.
+
+For example:
+
+If employee turnover increases, the AI may identify possible contributing factors and recommend further investigation.
+
+### AI Features
+
+- Explain KPI definitions in simple language.
+- Explain calculation formulas.
+- Interpret trends.
+- Summarize weekly reports.
+- Summarize monthly reports.
+- Identify unusual changes.
+- Highlight possible operational risks.
+- Suggest improvement strategies.
+- Compare performance across periods.
+- Generate management-ready summaries.
+
+Create an AI assistant called:
+
+**HR Performance Intelligence Assistant**
+
+Users should be able to ask questions such as:
+
+- Why did employee turnover increase?
+- Which KPIs need immediate attention?
+- What improved this month?
+- Which departments are underperforming?
+- Summarize our HR performance for management.
+- What should the HR department focus on next month?
+
+### AI Accuracy Requirements
+
+The AI must only use data that the current user is authorized to access.
+
+Distinguish between:
+
+- Verified calculations
+- Observed trends
+- Possible explanations
+- Recommendations
+
+Do not present speculation as fact.
+
+Do not invent numerical results or missing data.
+
+AI insights must be grounded in calculated KPI values and available historical information.
+
+---
+
+## 12. USER EXPERIENCE AND VISUAL DESIGN
+
+Create a premium enterprise SaaS design.
+
+The interface must feel like a professional analytics product used by large organizations.
+
+### Design Direction
+
+- Modern and minimalist
+- Elegant typography
+- Clean KPI cards
+- Professional data visualization
+- Well-organized navigation
+- Spacious layouts
+- Subtle shadows
+- Consistent border radius
+- Smooth interactions
+- Professional color palette
+
+Suggested colors:
+
+- Deep Navy: #0F172A
+- Professional Blue: #2563EB
+- White: #FFFFFF
+- Light Gray: #F8FAFC
+- Success Green: #16A34A
+- Warning Amber: #F59E0B
+- Critical Red: #DC2626
+
+Use color meaningfully for performance states.
+
+### Navigation Structure
+
+Create a sidebar with:
+
+1. Overview Dashboard
+2. KPI Library
+3. My KPIs
+4. Data Entry
+5. Analytics
+6. Reports
+7. AI Insights
+8. Departments
+9. Team & Users
+10. Import Center
+11. Notifications
+12. Settings
+
+### Language Support
+
+The application must support both:
+
+- Arabic
+- English
+
+Arabic must support proper RTL layouts.
+
+English must support LTR layouts.
+
+Use professional Arabic translations.
+
+All major navigation, buttons, forms, tables, notifications, and reports should support localization.
+
+### Other Requirements
+
+- Fully responsive desktop and mobile layouts.
+- Light and dark modes.
+- Accessible form controls.
+- Clear loading states.
+- Empty states.
+- Error messages.
+- Confirmation dialogs.
+- Guided onboarding.
+- Searchable tables.
+- Interactive charts.
+
+Create a beautiful login page, onboarding flow, and main dashboard.
+
+---
+
+## 13. DATA GOVERNANCE, SECURITY, AND RELIABILITY
+
+HR data can be confidential.
+
+Implement:
+
+- Secure authentication.
+- Role-based permissions.
+- Tenant-level data isolation.
+- Backend authorization checks.
+- Input validation.
+- Safe formula execution.
+- Audit logging.
+- Change history.
+- Secure document access.
+- Data retention settings.
+- Export capabilities.
+- Appropriate deletion workflows.
+- Protection against unauthorized modifications.
+
+Prefer aggregated HR data when individual employee information is unnecessary.
+
+Avoid collecting sensitive personal information unless genuinely required by the KPI.
+
+Ensure that KPI calculations are traceable to source data.
+
+Maintain source document references.
+
+Implement proper error handling and clear system feedback.
+
+---
+
+## 14. DATA MODEL AND ADMINISTRATION
+
+Design a scalable database schema that supports:
+
+- Organizations
+- Departments
+- Users
+- Organization memberships
+- Roles and permissions
+- KPI master definitions
+- KPI definition versions
+- Formula definitions
+- Input variable definitions
+- Organization-specific KPI assignments
+- Data-entry submissions
+- Historical values
+- KPI targets
+- Threshold configurations
+- Calculation results
+- Reporting periods
+- Generated reports
+- Reporting schedules
+- Notifications
+- Uploaded documents
+- Import review sessions
+- Audit logs
+
+Important:
+
+Keep KPI definitions separate from organizational KPI data.
+
+Multiple organizations may use the same KPI definition while maintaining different input values, targets, and performance results.
+
+Allow formula definitions to evolve without corrupting historical reports.
+
+Store the exact formula version used to generate each result.
+
+---
+
+## 15. ADMINISTRATIVE KPI BUILDER
+
+Create a visual KPI Builder.
+
+Administrators should be able to create or modify KPI definitions without programming.
+
+The builder should allow users to:
+
+1. Name a KPI.
+2. Add a description.
+3. Define its objective.
+4. Select a category.
+5. Specify required input variables.
+6. Define or edit the formula.
+7. Select measurement units.
+8. Select data-entry frequency.
+9. Configure reporting frequency.
+10. Set targets.
+11. Set performance thresholds.
+12. Test the formula.
+13. Preview the KPI card.
+14. Save the KPI as a draft.
+15. Publish an approved version.
+
+Include a formula validation panel.
+
+Allow testing with example data.
+
+Display calculation errors before publication.
+
+Require approval for changes that affect published KPI calculations.
+
+---
+
+## 16. ONBOARDING EXPERIENCE
+
+When an organization first registers:
+
+Step 1: Create organization profile.
+
+Step 2: Add departments.
+
+Step 3: Select KPIs from the master library.
+
+Step 4: Configure targets and reporting frequency.
+
+Step 5: Assign responsible users.
+
+Step 6: Enter initial data.
+
+Step 7: View calculated KPI results.
+
+Step 8: Configure report delivery schedules.
+
+Make onboarding intuitive for nontechnical HR professionals.
+
+---
+
+## 17. DEMONSTRATION AND TESTING
+
+Create a demo organization with realistic, clearly labeled fictional data.
+
+Include several sample KPIs to demonstrate the functionality.
+
+Sample KPIs must be separated from real imported indicators.
+
+Do not present demonstration records as actual customer data.
+
+Test at least these workflows:
+
+1. User registration and login.
+2. Organization creation.
+3. KPI document upload.
+4. KPI extraction and approval.
+5. KPI card generation.
+6. Dynamic data-entry form generation.
+7. Correct mathematical calculation.
+8. KPI target comparison.
+9. Performance status calculation.
+10. Historical result preservation.
+11. Weekly report generation.
+12. Monthly report generation.
+13. Report PDF export.
+14. Organization access restrictions.
+15. Arabic/English switching.
+
+### Critical Calculation Tests
+
+Verify:
+
+- Division-by-zero handling.
+- Missing data handling.
+- Correct monthly aggregation of ratios.
+- Weighted averages.
+- Percentage calculations.
+- Non-additive KPI calculations.
+- Historical formula versioning.
+- Correct reporting-period boundaries.
+- No duplicate scheduled reports.
+- Correct time-zone handling.
+
+---
+
+## 18. IMPLEMENTATION STRATEGY
+
+Build the application in logical implementation phases.
+
+**Phase 1 — Functional Foundation**
+- Full UI layout.
+- Authentication.
+- Organization management.
+- Persistent database.
+- KPI library.
+- KPI detail pages.
+
+**Phase 2 — KPI Intelligence Engine**
+- File import.
+- Document extraction.
+- KPI review workflow.
+- Dynamic form generation.
+- Formula validation.
+- Automatic calculations.
+
+**Phase 3 — Analytics**
+- Executive dashboard.
+- Targets and thresholds.
+- Historical comparisons.
+- Interactive charts.
+- Department reporting.
+
+**Phase 4 — Automated Reporting**
+- Weekly reporting.
+- Monthly reporting.
+- PDF and Excel exports.
+- Backend scheduling.
+- Notifications.
+
+**Phase 5 — Advanced Intelligence**
+- AI assistant.
+- Trend analysis.
+- Management recommendations.
+- Advanced administration.
+- Final testing and optimization.
+
+Implement as much of the working application as possible in the current build.
+
+Do not stop after creating only a landing page or dashboard mockup.
+
+Keep all modules connected through shared application state and persistent storage.
+
+If an external service requires configuration, create a functional integration layer and explain the missing configuration clearly.
+
+---
+
+## 19. FINAL QUALITY REQUIREMENTS
+
+The completed platform must:
+
+- Have professional enterprise-level visual quality.
+- Include real navigation between working pages.
+- Allow real persistent data entry.
+- Perform correct calculations.
+- Support dynamic KPI definitions.
+- Support real organization accounts.
+- Store historical KPI performance.
+- Generate downloadable reports.
+- Support Arabic and English.
+- Work on desktop and mobile.
+- Provide a maintainable project structure.
+- Separate frontend, backend, and calculation logic.
+- Avoid fake functionality and misleading placeholder data.
+
+For every major feature, distinguish between:
+
+- Fully implemented and tested.
+- Implemented but requiring external configuration.
+- Prototype-only functionality.
+- Not yet implemented.
+
+Do not claim background scheduling, email delivery, or Google Drive integration is functional unless it has actually been configured and verified.
+
+At the end, provide:
+
+1. A summary of implemented features.
+2. Project architecture.
+3. Database structure.
+4. External services requiring configuration.
+5. Testing results.
+6. Production deployment instructions.
+7. Remaining improvements before real customer use.
+
+**START BUILDING THE COMPLETE HR KPI INTELLIGENCE PLATFORM NOW.**
+
+Prioritize a functional, accurate, scalable application with exceptional UI/UX quality.
